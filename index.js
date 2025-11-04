@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import { productControllers } from "./controllers/productsControllers.js";
 
 const app = express();
 
@@ -14,9 +15,12 @@ mongoose
     console.error("Could not connect to the Mongodb Database", err)
   );
 
+app.use("/api/product", productControllers);
+
 app.get("/", (req, res) => {
   res.send(" Server runndig succefully");
 });
 
 const port = process.env.PORT || 5000;
+
 app.listen(port, () => console.log(`App listening on Port ${port}`));
